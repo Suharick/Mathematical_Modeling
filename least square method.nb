@@ -1,0 +1,183 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      6498,        175]
+NotebookOptionsPosition[      5952,        157]
+NotebookOutlinePosition[      6325,        173]
+CellTagsIndexPosition[      6282,        170]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[TextData[StyleBox["\:041f\:043e\:0438\:0441\:043a \:043a\:043e\:044d\
+\:0444\:0444\:0438\:0446\:0438\:0435\:043d\:0442\:043e\:0432 \:0432 \:043c\
+\:0435\:0442\:043e\:0434\:0435 \:043d\:0430\:0438\:043c\:0435\:043d\:044c\
+\:0448\:0438\:0445 \:043a\:0432\:0430\:0434\:0440\:0430\:0442\:043e\:0432",
+ FontColor->RGBColor[1, 0.5, 0]]], "Text",
+ CellChangeTimes->{{3.808982797266149*^9, 
+  3.808982853022688*^9}},ExpressionUUID->"df119205-c57b-41ce-9383-\
+24a3e138750b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"Clear", "[", 
+  RowBox[{"findCoeff", ",", "data"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"data", "=", 
+   RowBox[{"Association", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"\"\<gdp\>\"", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+        "83278", ",", "90884", ",", "83743", ",", "91530", ",", "101313", ",",
+          "116415", ",", "127434", ",", "136274", ",", "146470", ",", 
+         "145052", ",", "140288", ",", "142022", ",", "149895", ",", "147122",
+          ",", "163620"}], "}"}]}], ",", 
+      RowBox[{"\"\<k\>\"", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+        "234236", ",", "254890", ",", "217606", ",", "221746", ",", "228757", 
+         ",", "250238", ",", "266469", ",", "266154", ",", "269520", ",", 
+         "263098", ",", "252357", ",", "262536", ",", "285700", ",", "277522",
+          ",", "307946"}], "}"}]}], ",", 
+      RowBox[{"\"\<l\>\"", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+        "73426", ",", "77568", ",", "70460", ",", "75131", ",", "79694", ",", 
+         "89276", ",", "97056", ",", "101633", ",", "100124", ",", "94920", 
+         ",", "96671", ",", "100072", ",", "101304", ",", "96784", ",", 
+         "100352"}], "}"}]}]}], "}"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"findCoeff", "[", "data_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"lnY", "=", 
+       RowBox[{"N", "/@", 
+        RowBox[{"Log", "/@", 
+         RowBox[{"data", "[", "\"\<gdp\>\"", "]"}]}]}]}], ",", 
+      RowBox[{"lnK", "=", 
+       RowBox[{"N", "/@", 
+        RowBox[{"Log", "/@", 
+         RowBox[{"data", "[", "\"\<k\>\"", "]"}]}]}]}], ",", 
+      RowBox[{"lnL", "=", 
+       RowBox[{"N", "/@", 
+        RowBox[{"Log", "/@", 
+         RowBox[{"data", "[", "\"\<l\>\"", "]"}]}]}]}], ",", "bMatr", ",", 
+      "zMatr", ",", "cMatr"}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"bMatr", "=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Length", "@", 
+           RowBox[{"data", "[", "\"\<gdp\>\"", "]"}]}], ",", 
+          RowBox[{"Total", "@", "lnK"}], ",", 
+          RowBox[{"Total", "@", "lnL"}]}], "}"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Total", "@", "lnK"}], ",", 
+          RowBox[{"Total", "[", 
+           RowBox[{"lnK", "*", "lnK"}], "]"}], ",", 
+          RowBox[{"Total", "[", 
+           RowBox[{"lnK", "*", "lnL"}], "]"}]}], "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Total", "@", "lnL"}], ",", 
+          RowBox[{"Total", "[", 
+           RowBox[{"lnK", "*", "lnL"}], "]"}], ",", 
+          RowBox[{"Total", "[", 
+           RowBox[{"lnL", "*", "lnL"}], "]"}]}], "}"}]}], "}"}]}], ";", 
+     RowBox[{"zMatr", "=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Total", "@", "lnY"}], ",", 
+        RowBox[{"Total", "[", 
+         RowBox[{"lnK", "*", "lnY"}], "]"}], ",", 
+        RowBox[{"Total", "[", 
+         RowBox[{"lnY", "*", "lnL"}], "]"}]}], "}"}]}], ";", 
+     RowBox[{"cMatr", "=", 
+      RowBox[{"zMatr", ".", 
+       RowBox[{"Inverse", "@", "bMatr"}]}]}], ";", "cMatr"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"findCoeff", "[", "data", "]"}], "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.808982891983451*^9, 3.808982902552411*^9}, 
+   3.8089830146820164`*^9, {3.8089830919120846`*^9, 3.8089831821780596`*^9}, {
+   3.80898324726694*^9, 3.8089832473948803`*^9}, {3.8089832925298615`*^9, 
+   3.8089835390116796`*^9}, {3.808983599976268*^9, 3.808983656619931*^9}, {
+   3.8090050059211664`*^9, 3.809005052083827*^9}, {3.809005115993395*^9, 
+   3.8090052483792315`*^9}, {3.8090052817456183`*^9, 
+   3.8090052841529055`*^9}, {3.8090053195826783`*^9, 
+   3.8090055182109623`*^9}, {3.809005664587393*^9, 3.809005767733616*^9}, {
+   3.809005817467289*^9, 3.8090058421801767`*^9}, 
+   3.8090058858215146`*^9},ExpressionUUID->"24ddf218-ff85-45d9-be12-\
+07f9067a28eb"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", 
+   TagBox[GridBox[{
+      {
+       RowBox[{"-", "9.651035804956337`"}]},
+      {"0.3581662946016877`"},
+      {"1.481820383152808`"}
+     },
+     GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.5599999999999999]}, 
+         Offset[0.27999999999999997`]}, "Rows" -> {
+         Offset[0.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}}],
+    Column], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{{3.809005699413327*^9, 3.8090057683454494`*^9}, {
+  3.8090058187549086`*^9, 3.8090058430519*^9}},
+ CellLabel->
+  "Out[43]//MatrixForm=",ExpressionUUID->"1bfbb1e3-ecea-458f-b9dd-\
+7a5b21c32c90"]
+}, Open  ]]
+},
+WindowSize->{1366, 685},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+Magnification:>1.5 Inherited,
+FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 8, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 470, 7, 52, "Text",ExpressionUUID->"df119205-c57b-41ce-9383-24a3e138750b"],
+Cell[CellGroupData[{
+Cell[1053, 31, 4057, 97, 730, "Input",ExpressionUUID->"24ddf218-ff85-45d9-be12-07f9067a28eb"],
+Cell[5113, 130, 823, 24, 117, "Output",ExpressionUUID->"1bfbb1e3-ecea-458f-b9dd-7a5b21c32c90"]
+}, Open  ]]
+}
+]
+*)
+
